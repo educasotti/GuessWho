@@ -1,0 +1,61 @@
+﻿@model Repository.Model.Player
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Player</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Picture)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Picture)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsPublished)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsPublished)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Country.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Country.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Decade.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Decade.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Level.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Level.Description)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

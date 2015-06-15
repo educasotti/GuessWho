@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GuessWho.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GuessWhoStoreContainer">
+    <EntitySet Name="Player" EntityType="GuessWho.Store.Player" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country" EntityType="GuessWho.Store.Country" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Level" EntityType="GuessWho.Store.Level" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Decade" EntityType="GuessWho.Store.Decade" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CountryPlayer" Association="GuessWho.Store.CountryPlayer">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="DecadePlayer" Association="GuessWho.Store.DecadePlayer">
+      <End Role="Decade" EntitySet="Decade" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="LevelPlayer" Association="GuessWho.Store.LevelPlayer">
+      <End Role="Level" EntitySet="Level" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Picture" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="DecadeId" Type="int" Nullable="false" />
+    <Property Name="LevelId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Flag" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Level">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Decade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CountryPlayer">
+    <End Role="Country" Type="GuessWho.Store.Country" Multiplicity="1" />
+    <End Role="Player" Type="GuessWho.Store.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DecadePlayer">
+    <End Role="Decade" Type="GuessWho.Store.Decade" Multiplicity="1" />
+    <End Role="Player" Type="GuessWho.Store.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Decade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="DecadeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LevelPlayer">
+    <End Role="Level" Type="GuessWho.Store.Level" Multiplicity="1" />
+    <End Role="Player" Type="GuessWho.Store.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

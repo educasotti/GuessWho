@@ -1,0 +1,76 @@
+﻿@model CMS.Models.PlayerViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Player</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.File)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.File, new { type = "file", accept=".png,.jpg"})
+            @Html.ValidationMessageFor(model => model.File)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsPublished)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsPublished)
+            @Html.ValidationMessageFor(model => model.IsPublished)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CountryId, "Country")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CountryId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CountryId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DecadeId, "Decade")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DecadeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DecadeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LevelId, "Level")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("LevelId", String.Empty)
+            @Html.ValidationMessageFor(model => model.LevelId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

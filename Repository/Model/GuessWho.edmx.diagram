@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee4be9961c6d484b82c5aecea44600f1" Name="Diagram1" >
+        <EntityTypeShape EntityType="GuessWho.Player" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="GuessWho.Country" Width="1.5" PointX="10.125" PointY="1.625" />
+        <EntityTypeShape EntityType="GuessWho.Level" Width="1.5" PointX="8" PointY="1.25" />
+        <EntityTypeShape EntityType="GuessWho.Decade" Width="1.5" PointX="7.875" PointY="3.875" />
+        <AssociationConnector Association="GuessWho.CountryPlayer" />
+        <AssociationConnector Association="GuessWho.DecadePlayer" />
+        <AssociationConnector Association="GuessWho.LevelPlayer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GuessWho" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="GuessWhoContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Player" EntityType="GuessWho.Player" />
+    <EntitySet Name="Country" EntityType="GuessWho.Country" />
+    <EntitySet Name="Level" EntityType="GuessWho.Level" />
+    <EntitySet Name="Decade" EntityType="GuessWho.Decade" />
+    <AssociationSet Name="CountryPlayer" Association="GuessWho.CountryPlayer">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="DecadePlayer" Association="GuessWho.DecadePlayer">
+      <End Role="Decade" EntitySet="Decade" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="LevelPlayer" Association="GuessWho.LevelPlayer">
+      <End Role="Level" EntitySet="Level" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Picture" Type="String" Nullable="false" />
+    <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="GuessWho.CountryPlayer" FromRole="Player" ToRole="Country" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Decade" Relationship="GuessWho.DecadePlayer" FromRole="Player" ToRole="Decade" />
+    <Property Name="DecadeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Level" Relationship="GuessWho.LevelPlayer" FromRole="Player" ToRole="Level" />
+    <Property Name="LevelId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="Flag" Type="String" Nullable="false" />
+    <NavigationProperty Name="Player" Relationship="GuessWho.CountryPlayer" FromRole="Country" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="Level">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Player" Relationship="GuessWho.LevelPlayer" FromRole="Level" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="Decade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Player" Relationship="GuessWho.DecadePlayer" FromRole="Decade" ToRole="Player" />
+  </EntityType>
+  <Association Name="CountryPlayer">
+    <End Type="GuessWho.Country" Role="Country" Multiplicity="1" />
+    <End Type="GuessWho.Player" Role="Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DecadePlayer">
+    <End Type="GuessWho.Decade" Role="Decade" Multiplicity="1" />
+    <End Type="GuessWho.Player" Role="Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Decade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="DecadeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LevelPlayer">
+    <End Type="GuessWho.Level" Role="Level" Multiplicity="1" />
+    <End Type="GuessWho.Player" Role="Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

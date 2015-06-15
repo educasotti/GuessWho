@@ -1,0 +1,43 @@
+﻿@model Repository.Model.Player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Player</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Picture)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Picture)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsPublished)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsPublished)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Country.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Country.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
